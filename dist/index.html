@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Todo List</title>
+</head>
+<body>
+    <header>
+        Life's Pretty Ambiguous Without A Todo List. Make One Today!
+    </header>
+    <div id="container">
+        <div id="sidebar">
+            <p class="title">Projects</p>
+            <div id="projectContainer">
+            </div>
+            <form onkeydown="return event.key != 'Enter';">
+                <p><label for="newProject">New Project</label></p>
+                <p>
+                    <input type="text" id="newProject" minlength="1" placeholder="At Least One Character" required>
+                    <button type="button" id="submitProject">Create</button>
+                </p>
+            </form>
+        </div>
+        <div id="todolist">
+            <p id="title"></p>
+            <div id="todoContainer"></div>
+            <form onkeydown="return event.key != 'Enter';">
+                <p><label for="newTodo">New Todo</label></p>
+                <p>
+                    <input type="text" id="newTodo" minlength="1" placeholder="At Least One Character. No Date Required." required>
+                    <input type="date" id="newTodoDate">
+                    <button type="button" id="submitTodo">Create</button>
+                </p>
+            </form>
+        </div>
+    </div>
+    <script src="./main.js"></script>
+</body>
+</html> 
