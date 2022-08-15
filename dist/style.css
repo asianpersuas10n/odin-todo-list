@@ -105,16 +105,20 @@ form label {
     padding: 4px 8px;
 }
 
+#todolist > div > div > div {
+    background-color: buttonface;
+    display: flex;
+    justify-content: space-between;
+    width: 53rem;
+    border-radius: 8px;
+    padding: 4px 8px;
+    border: 2px solid black;
+}
+
 #todolist input[type=text] {
     font-size: 1rem;
     width: 665px;
     margin-top: 4px;
-}
-
-#todoContainer button:first-child {
-    display: flex;
-    justify-content: space-between;
-    width: 54rem;
 }
 
 #todoContainer > div {

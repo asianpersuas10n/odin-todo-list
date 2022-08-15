@@ -1,13 +1,21 @@
-import {domManip} from "./dommanip.js"
+import {domManip, projectContainer, todoContainer, submitProject, submitTodo,} from "./dommanip.js"
+//import {storageAvailable, updateStorage} from "./storage.js"
 
-const projectContainer = document.querySelector("#projectContainer")
-const todoContainer = document.querySelector("#todoContainer")
-const submitProject = document.querySelector("#submitProject")
-const submitTodo = document.querySelector("#submitTodo")
+let currentProject = {}
+let projectArr = []
 
-let currentProject = {name: "default", list: [{title: "This is a todo example.", "due date": "10/10/2022"}],}
+if (localStorage.getItem("allProjects") === null) {
+    currentProject = {name: "default", list: [{title: "This is a todo example.", "due date": "10/10/2022"}],}
+    projectArr = [{name: "default", list: [{title: "This is a todo example.", "due date": "10/10/2022"}],}]
+} else {
+    currentProject = JSON.parse(localStorage.getItem('selectedProject'))
+    projectArr = JSON.parse(localStorage.getItem("allProjects"))
+}
 
-let projectArr = [{name: "default", list: [{title: "This is a todo example.", "due date": "10/10/2022"}],}]
+function updateStorage() {
+    localStorage.setItem('selectedProject', JSON.stringify(currentProject))
+    localStorage.setItem("allProjects", JSON.stringify(projectArr))
+}
 
 function projects(name) {
     return {
@@ -28,8 +36,9 @@ function createProject() {
     if (_newProject === "") {return}
     projectArr.push(projects(_newProject))
     domManip()
+    updateStorage()
     document.querySelector("#newProject").value = ""
-    document.querySelector("#projectContainer").lastChild.firstChild.click()
+    projectContainer.lastChild.firstChild.click()
 }
 
 function createTodo(project) {
@@ -38,25 +47,22 @@ function createTodo(project) {
     const _newTodoDate = document.querySelector("#newTodoDate").value
     projectArr[projectArr.indexOf(project)].list.push(todos(_newTodo, _newTodoDate))
     domManip()
+    updateStorage()
     document.querySelector("#newTodo").value = ""
 }
 
 submitProject.addEventListener("click", createProject)
-
 
 submitTodo.addEventListener("click", () => {
     if (projectArr[0] === undefined) {return}
     createTodo(currentProject)
 })
 
-
 domManip()
-document.querySelector("#projectContainer").lastChild.firstChild.click()
-
-
-
+projectContainer.lastChild.firstChild.click()
 
 export {
     projectArr,
     currentProject,
+    updateStorage,
 }
